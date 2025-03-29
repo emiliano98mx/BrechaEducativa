@@ -1,15 +1,37 @@
-# Ejercicio extra
+# PROYECTO FINAL SIG
 
-Todos los datos de la práctica pueden ser descargados del siguiente [link](https://drive.google.com/drive/folders/1hzKPipsvvtnzqzkHqaQQ9VLM45J4P6X7?usp=sharing)
+El backup de la base de datos así como las consultas realizadas se pueden encontrar en los siguientes links:
+Backup: [link](https://drive.google.com/file/d/1w_Ox36Pyg6RBx_DcA3C53d5yVtuP6By8/view?usp=drive_link)
+Consultas: [link](https://drive.google.com/file/d/16NMO18MGuAoxG5UXnQzLH4f140nzvKe9/view?usp=drive_link)
 
-En esta práctica vamos a comenzar a trabajar con dos tipos de datos, los espciales y los no espaciales para obtener información reelevante de una zona en específico. En este caso una parte de la Zona Metropolitana del Valle de México y el censo de población. 
+A pesar de que las consultas se encuentran en en el link previamente adjunto, a continuación se mostrará las consultas realizadas para su limpieza, esto con el fin de poner a prueba los conocimientos aprendidos en el curso de SIG.
 
-
+# PREPARANDO BASE DE DATOS
+Debido a la naturaleza del proyecto, se utilizaran datos de escuelas, alumnos, situación socioeconómica, entre otros. Por ende se crearon esquemas para organizar los datos de acuerdo a su categoría.
 ``` sql
-create database extras;
-create extension postgis;
-create schema ej01;
+create database proyecto_sig;
+
+create schema escuelas;
+create schema alumnos;
+create schema pobreza;
 ```
+Todos los datos mencionados anteriormente se tienen en formato .csv, a esto se les suma los datos de municipios y estados de la República Mexicana en formato shapefile.
+Los datos fueron importados a la base de datos mediante QGIS, los datos .csv no tenían ningún tipo de geometría asignada, pero sí el nombre de la entidad o municipio a la que pertenecen.
+En primer lugar se genera una nueva columna para almacenar la geometría a las tablas.
+``` sql
+alter table alumnos."DBALUMNOS"
+add column geom (geometry,4326);
+```
+Debido a que los datos de los alumnos solamente contienen los datos por entidad (nombre de entidad), se realiza la siguiente consulta para asignarle la misma geometría que la capa shapefile de entidades.
+``` sql
+UPDATE alumnos."DBALUMNOS" AS a
+SET geom = e.geom
+FROM public."Entidades" AS e
+WHERE a.estado = e.ent_nomg;
+```
+Este proceso logró asignar la geometría de estado a las filas de los datos de alumnos, este mismo proceso se realizaron con las demás tablas; sin embargo, por la naturaleza de los datos de evaluación de los profesores se tuvo que realizar otro procedimiento.
+
+Los datos de la evaluación de los profesores indicaba el puntaje obtenido por cada profesor en diversos estados de la República, debido a que se tenían más de 300 mil datos, se optó por agruparlos por estado y obtener el puntaje promedio de los profesores por estado
 
 # PREPARANDO LOS DATOS
 
