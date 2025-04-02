@@ -8,7 +8,7 @@ A pesar de que las consultas se encuentran en en el link previamente adjunto, a 
 
 # PREPARANDO BASE DE DATOS
 Debido a la naturaleza del proyecto, se utilizaran datos de escuelas, alumnos, situación socioeconómica, entre otros. Por ende se crearon esquemas para organizar los datos de acuerdo a su categoría.
-``` sql
+``` R
 create database proyecto_sig;
 
 create schema escuelas;
