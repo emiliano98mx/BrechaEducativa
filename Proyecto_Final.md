@@ -22,6 +22,7 @@ En primer lugar se genera una nueva columna para almacenar la geometría a las t
 alter table alumnos."DBALUMNOS"
 add column geom (geometry,4326);
 ```
+## ALUMNOS
 Debido a que los datos de los alumnos solamente contienen los datos por entidad (nombre de entidad), se realiza la siguiente consulta para asignarle la misma geometría que la capa shapefile de entidades.
 ``` sql
 UPDATE alumnos."DBALUMNOS" AS a
