@@ -102,7 +102,7 @@ ggcorrplot(mc_rezg,
            colors = c("blue", "white", "red"))
 ```
 Una vez seleccionada esta variable, se corre la matriz para cada criterio y se selecciona dentro de cada criterio la variable con mayor correlación a re_ptot.
-
+### Alimentación 
 ```{r matriz de correlacion alimentación vs rezago}
 # Filtrar las variables por criterio
 variables_alimentacion <- dic_bd$variable[dic_bd$criterio == "alimentacion"]
@@ -120,4 +120,22 @@ ggcorrplot(matriz_correlacion,
            title = "Correlograma: Alimentación vs re_ptot",
            colors = c("blue", "white", "red"))
 
+```
+### Calidad y espacios
+```{r matriz Calidad y espacios}
+# Filtrar las variables
+var_espacios <- dic_bd$variable[dic_bd$criterio == "calidad y espacios vivienda"]
+
+# Crear una base de datos filtrada con las variables de alimentación y re_ptot
+bd_cev <- bd[, c(var_espacios, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_cev <- cor(bd_cev, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_cev, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Calidad y vivienda y Rezago Educativo",
+           colors = c("blue", "white", "red"))
 ```
