@@ -45,7 +45,7 @@ kable(head(bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
   scroll_box(width = "100%", height = "400px")
 ```
-# Diccionario de variables
+### Diccionario de variables
 ```{r Visualizar diccionarios}
 
 
