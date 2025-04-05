@@ -1,6 +1,6 @@
 ---
 title: "Analisis de correlacion"
-author: "Adrián Israel Silva Cardoza"
+author: "AdriÃ¡n Israel Silva Cardoza"
 date: "2025-03-27"
 output: html_document
 ---
@@ -40,9 +40,9 @@ kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
 
 ## Objetivo 1:
 
-•	Determinar las variables socioeconómicas y educativas a nivel estatal que influyen en el rezago educativo en México.
+â€¢	Determinar las variables socioeconÃ³micas y educativas a nivel estatal que influyen en el rezago educativo en MÃ©xico.
 
-Aqui se genera una matriz de correlación por CRITERIO, primero definimos dentro de las variables de la variable de rezago educativo, cual es la mas viable, adicionalmente como ya corrimos el stepwise seleccionamos para representar el rezago la varible re_ptot = Población con rezago eduactivo.
+Aqui se genera una matriz de correlaciÃ³n por CRITERIO, primero definimos dentro de las variables de la variable de rezago educativo, cual es la mas viable, adicionalmente como ya corrimos el stepwise seleccionamos para representar el rezago la varible re_ptot = PoblaciÃ³n con rezago eduactivo.
 
 ```{r matriz de rezago educativo}
 # Filtrar las variables del diccionario por criterio
@@ -51,7 +51,7 @@ var_rezg <- dic_bd$variable[dic_bd$criterio %in% c("rezago educativo")]
 # Crear una base de datos filtrada con estas variables
 bd_rezg <- bd[, var_rezg]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_rezg <- cor(bd_rezg, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -62,24 +62,24 @@ ggcorrplot(mc_rezg,
            colors = c("blue", "white", "red"))
 ```
 
-Una vez seleccionada esta variable, se corre la matriz para cada criterio y se selecciona dentro de cada criterio la variable con mayor correlación a re_ptot.
+Una vez seleccionada esta variable, se corre la matriz para cada criterio y se selecciona dentro de cada criterio la variable con mayor correlaciÃ³n a re_ptot.
 
 
-```{r matriz de correlacion alimentación vs rezago}
+```{r matriz de correlacion alimentaciÃ³n vs rezago}
 # Filtrar las variables por criterio
 variables_alimentacion <- dic_bd$variable[dic_bd$criterio == "alimentacion"]
 
-# Crear una base de datos filtrada con las variables de alimentación y re_ptot
+# Crear una base de datos filtrada con las variables de alimentaciÃ³n y re_ptot
 bd_filtro <- bd[, c(variables_alimentacion, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 matriz_correlacion <- cor(bd_filtro, use = "pairwise.complete.obs")
 
 # Generar el correlograma
 ggcorrplot(matriz_correlacion, 
            type = "lower", 
            lab = TRUE, 
-           title = "Correlograma: Alimentación vs re_ptot",
+           title = "Correlograma: AlimentaciÃ³n vs re_ptot",
            colors = c("blue", "white", "red"))
 
 ```
@@ -88,10 +88,10 @@ ggcorrplot(matriz_correlacion,
 # Filtrar las variables
 var_espacios <- dic_bd$variable[dic_bd$criterio == "calidad y espacios vivienda"]
 
-# Crear una base de datos filtrada con las variables de alimentación y re_ptot
+# Crear una base de datos filtrada con las variables de alimentaciÃ³n y re_ptot
 bd_cev <- bd[, c(var_espacios, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_cev <- cor(bd_cev, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -109,14 +109,14 @@ var_cs <- dic_bd$variable[dic_bd$criterio == "cohesion social"]
 # Crear una base de datos filtrada con estas variables
 bd_cs <- bd[, c(var_cs, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_cs <- cor(bd_cs, use = "pairwise.complete.obs")
 
 # Generar el correlograma
 ggcorrplot(mc_cs, 
            type = "lower", 
            lab = TRUE, 
-           title = "Correlograma: Cohesión social y Rezago Educativo",
+           title = "Correlograma: CohesiÃ³n social y Rezago Educativo",
            colors = c("blue", "white", "red"))
 ```
 
@@ -127,7 +127,7 @@ var_gdcap <- dic_bd$variable[dic_bd$criterio == "grado accesibilidad"]
 # Crear una base de datos filtrada con estas variables
 bd_gd <- bd[, c(var_gdcap, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_gd <- cor(bd_gd, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -145,7 +145,7 @@ var_inper <- dic_bd$variable[dic_bd$criterio == "ingreso per capita"]
 # Crear una base de datos filtrada con estas variables
 bd_inper <- bd[, c(var_inper, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_inper <- cor(bd_inper, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -163,7 +163,7 @@ var_pbrz <- dic_bd$variable[dic_bd$criterio == "pobreza"]
 # Crear una base de datos filtrada con estas variables
 bd_pbrz <- bd[, c(var_pbrz, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_pbrz <- cor(bd_pbrz, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -181,7 +181,7 @@ var_seg <- dic_bd$variable[dic_bd$criterio == "seguridad social"]
 # Crear una base de datos filtrada con estas variables
 bd_seg <- bd[, c(var_seg, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_seg <- cor(bd_seg, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -199,7 +199,7 @@ var_sv <- dic_bd$variable[dic_bd$criterio == "servicios basicos vivienda"]
 # Crear una base de datos filtrada con estas variables
 bd_sv <- bd[, c(var_sv, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_sv <- cor(bd_sv, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -217,7 +217,7 @@ var_sal <- dic_bd$variable[dic_bd$criterio == "servicios de salud"]
 # Crear una base de datos filtrada con estas variables
 bd_sal <- bd[, c(var_sal, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_sal <- cor(bd_sal, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -235,7 +235,7 @@ var_infra <- dic_bd$variable[dic_bd$criterio == "infraestructura educativa"]
 # Crear una base de datos filtrada con estas variables
 bd_infra <- bd[, c(var_infra, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_infra <- cor(bd_infra, use = "pairwise.complete.obs")
 
 # Generar el correlograma
@@ -253,27 +253,27 @@ var_edu <- dic_bd$variable[dic_bd$criterio == "educativo"]
 # Crear una base de datos filtrada con estas variables
 bd_edu <- bd[, c(var_edu, "re_ptot")]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_edu <- cor(bd_edu, use = "pairwise.complete.obs")
 
 # Generar el correlograma
 ggcorrplot(mc_edu, 
            type = "lower", 
            lab = TRUE, 
-           title = "Correlograma: Eduación y Rezago Educativo",
+           title = "Correlograma: EduaciÃ³n y Rezago Educativo",
            colors = c("blue", "white", "red"))
 ```
 
 ```{r Matriz de variables seleccionadas para el modelo}
-# Seleccionar las variables específicas
+# Seleccionar las variables especÃ­ficas
 variables_correlacion <- c("re_ptot", "al_paal", "cv_ccvi", "cs_ring", 
                            "ga_porb", "ip_pibe", "pz_pobr", 
                            "se_pvcs", "sb_pvdd", "ss_pasa", "ie_nesc", "ed_phind")
 
-# Filtrar las variables de interés en la base de datos
+# Filtrar las variables de interÃ©s en la base de datos
 bd_filtro <- bd[, variables_correlacion]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 matriz_correlacion <- cor(bd_filtro, use = "pairwise.complete.obs")
 print(round(matriz_correlacion,2))
 
@@ -287,16 +287,16 @@ ggcorrplot(matriz_correlacion,
 ```
 
 ## Objetivo 2
-•	Analizar la relación entre las variables educativas y socioeconómicas para la identificación de tendencias mediante técnicas estadísticas.
+â€¢	Analizar la relaciÃ³n entre las variables educativas y socioeconÃ³micas para la identificaciÃ³n de tendencias mediante tÃ©cnicas estadÃ­sticas.
 
-Una vez que se tienen las variables por criterio con mayor correlación para predecir el rezago educativo, entonces se identifica cual es la significancia estadística en terminos de valor de p mediante el stepwise. El stepwise es una técnica para la selección de variables en modelos de regresión. Su objetivo es encontrar un conjunto óptimo de variables predictoras, eliminando aquellas que no aportan significativamente al modelo. El valor de p indica la probabilidad de obtener los resultados observados si la variable realmente no tuviera ningún efecto (es decir, si la hipótesis nula fuera verdadera).
+Una vez que se tienen las variables por criterio con mayor correlaciÃ³n para predecir el rezago educativo, entonces se identifica cual es la significancia estadÃ­stica en terminos de valor de p mediante el stepwise. El stepwise es una tÃ©cnica para la selecciÃ³n de variables en modelos de regresiÃ³n. Su objetivo es encontrar un conjunto Ã³ptimo de variables predictoras, eliminando aquellas que no aportan significativamente al modelo. El valor de p indica la probabilidad de obtener los resultados observados si la variable realmente no tuviera ningÃºn efecto (es decir, si la hipÃ³tesis nula fuera verdadera).
 
 
 ```{r Modelo para rezago, eval =FALSE}
 # Preparar el modelo inicial (modelo nulo) y completo
 modelo_nulo <- lm(re_ptot  ~ 1, data = bd) 
 
-# Ajustar el modelo completo de regresión lineal
+# Ajustar el modelo completo de regresiÃ³n lineal
 modelo_completo <- lm(re_ptot ~ 
                         al_paal + cv_ccvi + cs_ring + 
                         ga_porb + ip_pibe + pz_pobr + 
@@ -306,10 +306,10 @@ modelo_completo <- lm(re_ptot ~
 # Mostrar un resumen del modelo
 summary(modelo_completo)
 
-# Aplicar la selección stepwise
+# Aplicar la selecciÃ³n stepwise
 modelo_stepwise <- step(modelo_nulo, 
                         scope = list(lower = modelo_nulo, upper = modelo_completo), 
-                        direction = "both")  # "both" para hacia adelante y hacia atrás
+                        direction = "both")  # "both" para hacia adelante y hacia atrÃ¡s
 
 # Resumen del modelo stepwise
 summary(modelo_stepwise)
@@ -323,7 +323,7 @@ variables_seleccionadas <- names(coef(modelo_stepwise))[-1]  # Excluye el interc
 # Filtrar las descripciones correspondientes en dic_bd
 descripciones <- dic_bd[dic_bd$variable %in% variables_seleccionadas, c("variable", "descripcion")]
 
-# Mostrar la tabla en un formato más legible
+# Mostrar la tabla en un formato mÃ¡s legible
 kable(descripciones, format = "html", table.attr = "style='width:100%;'") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
   scroll_box(width = "100%", height = "300px")
@@ -331,19 +331,19 @@ kable(descripciones, format = "html", table.attr = "style='width:100%;'") %>%
 # Generar predicciones del modelo
 predicciones <- predict(modelo_stepwise)
 
-# Crear el gráfico: valores reales vs predicciones
+# Crear el grÃ¡fico: valores reales vs predicciones
 plot(bd$re_ptot, predicciones, 
-     main = "Predicción vs Valores Observados", 
+     main = "PredicciÃ³n vs Valores Observados", 
      xlab = "Valores Observados (re_ptot)", 
      ylab = "Valores Predichos", 
      col = "blue", 
      pch = 20)
-abline(0, 1, col = "red")  # Línea de referencia
+abline(0, 1, col = "red")  # LÃ­nea de referencia
 
 # Filtrar la base de datos para incluir solo las variables seleccionadas
 var_sel <- bd[, variables_seleccionadas]
 
-# Calcular la matriz de correlación
+# Calcular la matriz de correlaciÃ³n
 mc_rez <- round(cor(var_sel, use = "pairwise.complete.obs"),2)
 
 # Generar el correlograma
