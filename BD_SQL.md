@@ -1,4 +1,4 @@
-# PROYECTO FINAL SIG
+# Base de Datos SQL
 
 El backup de la base de datos así como las consultas realizadas se pueden encontrar en los siguientes links:
 Backup: [link](https://drive.google.com/file/d/1w_Ox36Pyg6RBx_DcA3C53d5yVtuP6By8/view?usp=drive_link)
