@@ -24,8 +24,9 @@ Como insumos se utilizo:
 - una tabla en formato csv de indicadores estatales, generada a partir del preprocesamiento realizado en SQL.
 - Un diccionario de variables, que describe cada indicador junto con su categoría o "criterio".
   
-La documentación de la base de datos se elaboró siguiendo la metodología descrita en el siguiente enlace: [Metodología - Brecha Educativa](https://github.com/emiliano98mx/BrechaEducativa/blob/main/Proyecto_Final.md).
-.
+La documentación de la base de datos se elaboró siguiendo la metodología descrita en el siguiente enlace: [Metodología - Brecha Educativa](https://github.com/emiliano98mx/BrechaEducativa/blob/main/BD_SQL.md).
+
+
 
 
 
