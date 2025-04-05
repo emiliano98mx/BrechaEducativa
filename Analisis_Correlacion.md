@@ -38,16 +38,17 @@ dic_bd <- read_csv(paste0(dibas,"c01_exploracion_datos/analisis_r/diccionario_bd
 ```
 Se visualizaron los datos cargados 
 
-## Tabla de indicadores estatales
+### Indicadores estatales
 ```{r Visualizar cuadro de variables}
 
 kable(head(bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
   scroll_box(width = "100%", height = "400px")
 ```
+# Diccionario de variables
 ```{r Visualizar diccionarios}
 
-# Mostrar la tabla del diccionario de variables
+
 kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
   scroll_box(width = "100%", height = "400px")
