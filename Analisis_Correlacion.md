@@ -82,7 +82,7 @@ A partir de esta variable se calculo la matriz de correlación y las variables a
 
 - Nivel educativo
 
-Como resultado se obtiene un correlograma por cada grupo para identificar cuál variable tiene mayor relación con re_ptot.
+
 
 ```{r matriz de rezago educativo}
 # Filtrar las variables del diccionario por criterio
@@ -100,4 +100,24 @@ ggcorrplot(mc_rezg,
            lab = TRUE, 
            title = "Correlograma: Rezago Educativo",
            colors = c("blue", "white", "red"))
+```
+Una vez seleccionada esta variable, se corre la matriz para cada criterio y se selecciona dentro de cada criterio la variable con mayor correlación a re_ptot.
+
+```{r matriz de correlacion alimentación vs rezago}
+# Filtrar las variables por criterio
+variables_alimentacion <- dic_bd$variable[dic_bd$criterio == "alimentacion"]
+
+# Crear una base de datos filtrada con las variables de alimentación y re_ptot
+bd_filtro <- bd[, c(variables_alimentacion, "re_ptot")]
+
+# Calcular la matriz de correlación
+matriz_correlacion <- cor(bd_filtro, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(matriz_correlacion, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Alimentación vs re_ptot",
+           colors = c("blue", "white", "red"))
+
 ```
