@@ -1,9 +1,7 @@
----
-title: "Analisis de correlacion"
-author: "Adrián Israel Silva Cardoza"
-date: "2025-03-27"
-output: html_document
----
+# Análisis de correlación
+
+**Autor:** Adrián Israel Silva Cardoza  
+**Fecha:** 2025-03-27
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
