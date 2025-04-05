@@ -20,7 +20,7 @@ Este análisis tiene como objetivo identificar las variables socioeconómicas y 
 
 ##  Cargar los datos 
 
-Como insumos se utilizo:
+Se utilizó como insumos:
 - una tabla en formato csv de indicadores estatales, generada a partir del preprocesamiento realizado en SQL "bd_ent_socioeconomico_2020.csv".
 - Un diccionario de variables, que describe cada indicador junto con su categoría o "criterio" " diccionario_bd.csv".
   
@@ -36,6 +36,17 @@ bd <- read_csv(paste0(dibas,"c01_exploracion_datos/analisis_r/bd_ent_socioeconom
 # Cargar el diccionario de variables
 dic_bd <- read_csv(paste0(dibas,"c01_exploracion_datos/analisis_r/diccionario_bd.csv"),show_col_types = FALSE)
 ```
+Se visualizaron los datos cargados 
 
+```{r Visualizar cuadro de variables}
+# Mostrar la tabla de indicadores estatales
+kable(head(bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  scroll_box(width = "100%", height = "400px")
 
+# Mostrar la tabla del diccionario de variables
+kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  scroll_box(width = "100%", height = "400px")
+```
 
