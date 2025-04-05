@@ -326,3 +326,17 @@ ggcorrplot(matriz_correlacion,
            colors = c("red", "white", "blue"))
 
 ```
+Una vez calculadas las correlaciones, se selecciona una variable por criterio (la más correlacionada con re_ptot) para construir un conjunto reducido de predictores. Las variables seleccionadas son las siguientes:
+
+- `re_ptot`: Población con rezago educativo  
+- `al_paal`: Población con acceso a la alimentación (estimado)  
+- `cv_ccvi`: Calidad y condiciones de la vivienda (índice compuesto)  
+- `cs_ring`: Índice de cohesión social (estimado)  
+- `ga_porb`: Grado de accesibilidad a recursos básicos  
+- `ip_pibe`: Ingreso per cápita estimado o PIB estatal  
+- `pz_pobr`: Porcentaje de población en pobreza  
+- `se_pvcs`: Seguridad social: población vinculada a cobertura social  
+- `sb_pvdd`: Servicios básicos en vivienda: disponibilidad de drenaje  
+- `ss_pasa`: Servicios de salud: acceso asegurado  
+- `ie_nesc`: Infraestructura educativa: número de escuelas 
+- `ed_phind`: Índice de educación promedio o escolaridad promedio (estimado)  
