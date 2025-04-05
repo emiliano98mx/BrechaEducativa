@@ -58,7 +58,7 @@ kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
 El objetivo de esta sección es identificar las variables que se asocian con el rezago educativo a nivel estatal. Para ello, se define como variable principal re_ptot, que representa la población con rezago educativo. Esta variable fue seleccionada mediante el método stepwise, al ser la que mostró mayor capacidad explicativa del fenómeno entre un conjunto amplio de indicadores.
 
 ### Correlaciones por criterio
-A partir de esta variable se calculo la matriz de correlación
+A partir de esta variable se calculo la matriz de correlación y las variables agrupadas por los siguientes criterios del diccionario:
 
 - Alimentación
 
@@ -82,4 +82,22 @@ A partir de esta variable se calculo la matriz de correlación
 
 - Nivel educativo
 
-Se obtiene un correlograma por cada grupo para identificar cuál variable tiene mayor relación con re_ptot.
+Como resultado se obtiene un correlograma por cada grupo para identificar cuál variable tiene mayor relación con re_ptot.
+
+```{r matriz de rezago educativo}
+# Filtrar las variables del diccionario por criterio
+var_rezg <- dic_bd$variable[dic_bd$criterio %in% c("rezago educativo")]
+
+# Crear una base de datos filtrada con estas variables
+bd_rezg <- bd[, var_rezg]
+
+# Calcular la matriz de correlación
+mc_rezg <- cor(bd_rezg, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_rezg, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
