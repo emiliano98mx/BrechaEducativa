@@ -57,7 +57,7 @@ kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
 ## Objetivo 1:
 El objetivo de esta sección es identificar las variables que se asocian con el rezago educativo a nivel estatal. Para ello, se define como variable principal re_ptot, que representa la población con rezago educativo. Esta variable fue seleccionada mediante el método stepwise, al ser la que mostró mayor capacidad explicativa del fenómeno entre un conjunto amplio de indicadores.
 
-Correlaciones por criterio
+### Correlaciones por criterio
 A partir de esta variable principal, se calcula una matriz de correlación entre re_ptot y el resto de las variables, agrupadas según los criterios definidos en el diccionario de dato: 
 
 - Alimentación
