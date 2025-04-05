@@ -1,7 +1,6 @@
 # Análisis de correlación
 
-**Autor:** Adrián Israel Silva Cardoza  
-          
+        
 **Fecha:** 2025-03-27
 
 Este análisis tiene como objetivo identificar las variables socioeconómicas y educativas que influyen en el rezago educativo en México. Se utiliza una estrategia basada en matrices de correlación y modelos de regresión para seleccionar las variables más significativas.
@@ -195,4 +194,135 @@ ggcorrplot(mc_inper,
            title = "Correlograma: Ingreso y Rezago Educativo",
            colors = c("blue", "white", "red"))
 ```
+### Pobreza y rezago educativo 
+```{r Matriz pobreza}
+# Filtrar las variables
+var_pbrz <- dic_bd$variable[dic_bd$criterio == "pobreza"]
 
+# Crear una base de datos filtrada con estas variables
+bd_pbrz <- bd[, c(var_pbrz, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_pbrz <- cor(bd_pbrz, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_pbrz, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Pobreza y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+### Seguridad social y rezago educativo
+```{r Matriz seguridad social}
+# Filtrar las variables
+var_seg <- dic_bd$variable[dic_bd$criterio == "seguridad social"]
+
+# Crear una base de datos filtrada con estas variables
+bd_seg <- bd[, c(var_seg, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_seg <- cor(bd_seg, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_seg, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Seguridad social y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+### Servicios basicos vivienda y rezago educativo
+
+```{r Matriz servicios vivienda}
+# Filtrar las variables
+var_sv <- dic_bd$variable[dic_bd$criterio == "servicios basicos vivienda"]
+
+# Crear una base de datos filtrada con estas variables
+bd_sv <- bd[, c(var_sv, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_sv <- cor(bd_sv, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_sv, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Servicios basicos vivienda y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+### Servicios salud y rezago educativo
+```{r Matriz servicios salud}
+# Filtrar las variables
+var_sal <- dic_bd$variable[dic_bd$criterio == "servicios de salud"]
+
+# Crear una base de datos filtrada con estas variables
+bd_sal <- bd[, c(var_sal, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_sal <- cor(bd_sal, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_sal, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Servicios salud y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+### Infraestructura y rezago educativo
+```{r Matriz infraestructura educativa}
+# Filtrar las variables
+var_infra <- dic_bd$variable[dic_bd$criterio == "infraestructura educativa"]
+
+# Crear una base de datos filtrada con estas variables
+bd_infra <- bd[, c(var_infra, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_infra <- cor(bd_infra, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_infra, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Infraestructura y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+
+```{r Matriz educativa, eval =FALSE}
+# Filtrar las variables
+var_edu <- dic_bd$variable[dic_bd$criterio == "educativo"]
+
+# Crear una base de datos filtrada con estas variables
+bd_edu <- bd[, c(var_edu, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_edu <- cor(bd_edu, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_edu, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Eduación y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+
+
+```{r Matriz de variables seleccionadas para el modelo}
+# Seleccionar las variables específicas
+variables_correlacion <- c("re_ptot", "al_paal", "cv_ccvi", "cs_ring", 
+                           "ga_porb", "ip_pibe", "pz_pobr", 
+                           "se_pvcs", "sb_pvdd", "ss_pasa", "ie_nesc", "ed_phind")
+
+# Filtrar las variables de interés en la base de datos
+bd_filtro <- bd[, variables_correlacion]
+
+# Calcular la matriz de correlación
+matriz_correlacion <- cor(bd_filtro, use = "pairwise.complete.obs")
+print(round(matriz_correlacion,2))
+
+# Generar el correlograma
+ggcorrplot(matriz_correlacion, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma variables socioeconomicas vs rezago educativo",
+           colors = c("red", "white", "blue"))
+
+```
