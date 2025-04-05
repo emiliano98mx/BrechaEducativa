@@ -139,3 +139,60 @@ ggcorrplot(mc_cev,
            title = "Correlograma: Calidad y vivienda y Rezago Educativo",
            colors = c("blue", "white", "red"))
 ```
+### Cohesion social
+
+```{r Matriz corr cohesion social, eval =FALSE}
+# Filtrar las variables
+var_cs <- dic_bd$variable[dic_bd$criterio == "cohesion social"]
+
+# Crear una base de datos filtrada con estas variables
+bd_cs <- bd[, c(var_cs, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_cs <- cor(bd_cs, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_cs, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Cohesión social y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+### Grado de accesibilidad y resago educativo 
+
+```{r Matriz corr GDCAP}
+# Filtrar las variables
+var_gdcap <- dic_bd$variable[dic_bd$criterio == "grado accesibilidad"]
+
+# Crear una base de datos filtrada con estas variables
+bd_gd <- bd[, c(var_gdcap, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_gd <- cor(bd_gd, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_gd, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Grado accesibilidad y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+### Ingreso percapita
+```{r Matriz ingreso percapita}
+# Filtrar las variables
+var_inper <- dic_bd$variable[dic_bd$criterio == "ingreso per capita"]
+
+# Crear una base de datos filtrada con estas variables
+bd_inper <- bd[, c(var_inper, "re_ptot")]
+
+# Calcular la matriz de correlación
+mc_inper <- cor(bd_inper, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_inper, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Ingreso y Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
+
