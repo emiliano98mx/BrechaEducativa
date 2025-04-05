@@ -7,7 +7,7 @@ Este análisis tiene como objetivo identificar las variables socioeconómicas y 
 
 ---
 
-## 📦 Bibliotecas utilizadas
+##  Bibliotecas utilizadas
 
 - `readr`, `readxl`: Para la carga de datos.
 - `knitr`, `kableExtra`: Para formateo de tablas.
@@ -17,16 +17,14 @@ Este análisis tiene como objetivo identificar las variables socioeconómicas y 
 
 ---
 
-## 📁 Cargar los datos para 
+##  Cargar los datos 
 
-Se trabaja con dos archivos:
+Una tabla principal de indicadores estatales, generada a partir del preprocesamiento realizado en SQL.
 
-- Una base principal de indicadores estatales.
-- Un diccionario que describe cada variable y su categoría o "criterio".
+Un diccionario de variables, que describe cada indicador junto con su categoría o "criterio". 
+La documentación de la base de datos se elaboró siguiendo la metodología descrita en el siguiente enlace: [Metodología - Brecha Educativa](https://github.com/emiliano98mx/BrechaEducativa/blob/main/Proyecto_Final.md).
+.
 
-La ruta de acceso definida es:
 
-```r
-dibas = "D:/Centro_geo/C02_SIG/proyecto_final/"
 
 
