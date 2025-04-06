@@ -53,8 +53,9 @@ kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
   scroll_box(width = "100%", height = "400px")
 ```
 
-## Objetivo 1:
-primero definimos dentro de las variables de la variable de rezago educativo, cual es la mas viable, adicionalmente como ya corrimos el stepwise seleccionamos para representar el rezago la varible re_ptot = Población con rezago eduactivo.
+## Variable dependiente principal:
+Se definió como variable dependiente principal re_ptot, que representa la población con rezago educativo. Esta fue seleccionada mediante el método stepwise, al ser la que mostró la mayor capacidad explicativa dentro de las variables catalogadas como rezago educativo 
+
 
 ```{r matriz de rezago educativo}
 # Filtrar las variables del diccionario por criterio
@@ -343,7 +344,7 @@ Una vez calculadas las correlaciones, se selecciona una variable por criterio (l
 - `ie_nesc`: Infraestructura educativa: número de escuelas 
 - `ed_phind`: Índice de educación promedio o escolaridad promedio (estimado)  
 
-## Objetivo 2: Modelo predictivo del rezago educativo
+## Modelo predictivo del rezago educativo
 
 Con base del conjunto de variables seleccionadas en el paso anterior, se construyó un modelo de regresión lineal múltiple. Para optimizar el modelo, se aplicó nuevamente una técnica de selección stepwise, que permitió conservar únicamente aquellas variables que resultaron estadísticamente significativas para explicar el rezago educativo.
 
