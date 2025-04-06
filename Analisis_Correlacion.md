@@ -54,10 +54,28 @@ kable(head(dic_bd, 10), format = "html", table.attr = "style='width:100%;'") %>%
 ```
 
 ## Objetivo 1:
-El objetivo de esta sección es identificar las variables que se asocian con el rezago educativo a nivel estatal. Para ello, se define como variable principal re_ptot, que representa la población con rezago educativo. Esta variable fue seleccionada mediante el método stepwise, al ser la que mostró mayor capacidad explicativa del fenómeno entre un conjunto amplio de indicadores.
+primero definimos dentro de las variables de la variable de rezago educativo, cual es la mas viable, adicionalmente como ya corrimos el stepwise seleccionamos para representar el rezago la varible re_ptot = Población con rezago eduactivo.
+
+```{r matriz de rezago educativo}
+# Filtrar las variables del diccionario por criterio
+var_rezg <- dic_bd$variable[dic_bd$criterio %in% c("rezago educativo")]
+
+# Crear una base de datos filtrada con estas variables
+bd_rezg <- bd[, var_rezg]
+
+# Calcular la matriz de correlación
+mc_rezg <- cor(bd_rezg, use = "pairwise.complete.obs")
+
+# Generar el correlograma
+ggcorrplot(mc_rezg, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma: Rezago Educativo",
+           colors = c("blue", "white", "red"))
+```
 
 ### Correlaciones por criterio
-A partir de esta variable se calculo la matriz de correlación y las variables agrupadas por los siguientes criterios del diccionario:
+A partir de esta variable, se calculó la matriz de correlación con el resto de las variables, agrupadas según los criterios definidos en el diccionario de datos. Para cada grupo, se identificó la variable con mayor correlación respecto a re_ptot
 
 - Alimentación
 
@@ -83,23 +101,7 @@ A partir de esta variable se calculo la matriz de correlación y las variables a
 
 
 
-```{r matriz de rezago educativo}
-# Filtrar las variables del diccionario por criterio
-var_rezg <- dic_bd$variable[dic_bd$criterio %in% c("rezago educativo")]
 
-# Crear una base de datos filtrada con estas variables
-bd_rezg <- bd[, var_rezg]
-
-# Calcular la matriz de correlación
-mc_rezg <- cor(bd_rezg, use = "pairwise.complete.obs")
-
-# Generar el correlograma
-ggcorrplot(mc_rezg, 
-           type = "lower", 
-           lab = TRUE, 
-           title = "Correlograma: Rezago Educativo",
-           colors = c("blue", "white", "red"))
-```
 Una vez seleccionada esta variable, se corre la matriz para cada criterio y se selecciona dentro de cada criterio la variable con mayor correlación a re_ptot.
 ### Alimentación 
 ```{r matriz de correlacion alimentación vs rezago}
@@ -340,3 +342,74 @@ Una vez calculadas las correlaciones, se selecciona una variable por criterio (l
 - `ss_pasa`: Servicios de salud: acceso asegurado  
 - `ie_nesc`: Infraestructura educativa: número de escuelas 
 - `ed_phind`: Índice de educación promedio o escolaridad promedio (estimado)  
+
+## Objetivo 2: Modelo predictivo del rezago educativo
+
+Con base del conjunto de variables seleccionadas en el paso anterior, se construyó un modelo de regresión lineal múltiple. Para optimizar el modelo, se aplicó nuevamente una técnica de selección stepwise, que permitió conservar únicamente aquellas variables que resultaron estadísticamente significativas para explicar el rezago educativo.
+
+```{r Modelo para rezago, eval =FALSE}
+# Preparar el modelo inicial (modelo nulo) y completo
+modelo_nulo <- lm(re_ptot  ~ 1, data = bd) 
+
+# Ajustar el modelo completo de regresión lineal
+modelo_completo <- lm(re_ptot ~ 
+                        al_paal + cv_ccvi + cs_ring + 
+                        ga_porb + ip_pibe + pz_pobr + 
+                        se_pvcs + sb_pvdd + ss_pasa + 
+                        ie_nesc + ed_phind, data = bd)
+
+# Mostrar un resumen del modelo
+summary(modelo_completo)
+
+# Aplicar la selección stepwise
+modelo_stepwise <- step(modelo_nulo, 
+                        scope = list(lower = modelo_nulo, upper = modelo_completo), 
+                        direction = "both")  # "both" para hacia adelante y hacia atrás
+
+# Resumen del modelo stepwise
+summary(modelo_stepwise)
+
+# Variables seleccionadas
+modelo_stepwise$coefficients
+
+# Extraer los nombres de las variables seleccionadas en el modelo stepwise
+variables_seleccionadas <- names(coef(modelo_stepwise))[-1]  # Excluye el intercepto
+
+# Filtrar las descripciones correspondientes en dic_bd
+descripciones <- dic_bd[dic_bd$variable %in% variables_seleccionadas, c("variable", "descripcion")]
+
+# Mostrar la tabla en un formato más legible
+kable(descripciones, format = "html", table.attr = "style='width:100%;'") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F) %>%
+  scroll_box(width = "100%", height = "300px")
+
+# Generar predicciones del modelo
+predicciones <- predict(modelo_stepwise)
+
+# Crear el gráfico: valores reales vs predicciones
+plot(bd$re_ptot, predicciones, 
+     main = "Predicción vs Valores Observados", 
+     xlab = "Valores Observados (re_ptot)", 
+     ylab = "Valores Predichos", 
+     col = "blue", 
+     pch = 20)
+abline(0, 1, col = "red")  # Línea de referencia
+
+# Filtrar la base de datos para incluir solo las variables seleccionadas
+var_sel <- bd[, variables_seleccionadas]
+
+# Calcular la matriz de correlación
+mc_rez <- round(cor(var_sel, use = "pairwise.complete.obs"),2)
+
+# Generar el correlograma
+ggcorrplot(mc_rez, 
+           type = "lower", 
+           lab = TRUE, 
+           title = "Correlograma variables signficativas vs rezago educativo",
+           colors = c("red", "white", "blue"))
+
+# Guardar la matriz en un archivo para futuras consultas
+#write.csv(mc_rez, paste0(dibas, "rezago_matriz_correlacion.csv"))
+```
+
+
