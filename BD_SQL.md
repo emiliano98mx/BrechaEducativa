@@ -1,9 +1,12 @@
 # Base de Datos SQL
+La limpieza y generación de la base de datos se realizó utilizando **DBeaver 24.3.3** con conexión a **PostgreSQL 16** y **QGIS 3.30.3**.
 
-El backup de la base de datos así como las consultas realizadas se pueden encontrar en los siguientes links:
-Backup: [link](https://drive.google.com/file/d/1w_Ox36Pyg6RBx_DcA3C53d5yVtuP6By8/view?usp=drive_link)
-Consultas: [link](https://drive.google.com/file/d/16NMO18MGuAoxG5UXnQzLH4f140nzvKe9/view?usp=drive_link)
+Tanto el respaldo de la base de datos como las consultas realizadas están disponibles en los siguientes enlaces:
 
+- **Backup de la base de datos:** [Enlace](https://drive.google.com/file/d/1w_Ox36Pyg6RBx_DcA3C53d5yVtuP6By8/view?usp=drive_link)  
+- **Consultas SQL utilizadas:** [Enlace](https://drive.google.com/file/d/16NMO18MGuAoxG5UXnQzLH4f140nzvKe9/view?usp=drive_link)
+
+  
 A pesar de que las consultas se encuentran en en el link previamente adjunto, a continuación se mostrará las consultas realizadas para su limpieza, esto con el fin de poner a prueba los conocimientos aprendidos en el curso de SIG.
 
 # PREPARANDO BASE DE DATOS
