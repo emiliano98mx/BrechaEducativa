@@ -3,7 +3,9 @@
         
 **Fecha:** 2025-03-27
 
-Este análisis tiene como objetivo identificar las variables socioeconómicas y educativas que influyen en el rezago educativo en México. Se utiliza una estrategia basada en matrices de correlación y modelos de regresión para seleccionar las variables más significativas.
+Este análisis tiene como objetivo identificar las variables socioeconómicas y educativas que influyen en el rezago educativo en México. Se utiliza una estrategia basada en matrices de correlación y modelos de regresión para seleccionar las variables más significativas. El análisis fue realizado utilizando el software RStudio.
+
+
 
 ---
 
@@ -17,11 +19,10 @@ Este análisis tiene como objetivo identificar las variables socioeconómicas y 
 
 ---
 
-##  Cargar los datos 
+##  Insumos
 
-Se utilizó como insumos:
-- una tabla en formato csv de indicadores estatales, generada a partir del preprocesamiento realizado en SQL "bd_ent_socioeconomico_2020.csv".
-- Un diccionario de variables, que describe cada indicador junto con su categoría o "criterio" " diccionario_bd.csv".
+- Tabla en formato csv de indicadores estatales, generada a partir del preprocesamiento realizado en SQL "bd_ent_socioeconomico_2020.csv".
+- Diccionario de variables, que describe cada indicador junto con su categoría o "criterio" " diccionario_bd.csv".
   
 La documentación de la base de datos se elaboró siguiendo la metodología descrita en el siguiente enlace: [Metodología - Brecha Educativa](https://github.com/emiliano98mx/BrechaEducativa/blob/main/BD_SQL.md).
 
