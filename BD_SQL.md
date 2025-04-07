@@ -83,3 +83,24 @@ FROM (
 GROUP BY estado
 ORDER BY estado;
 ```
+De igual manera, se tienen datos puntuales de todas las escuelas del país de diferentes niveles educativos, estos cuentan con claves de entidad, por lo que se realizó un conteo de todas las escuelas del país, la suma de todos los profesores y estudiantes y se agrupó por estado.
+``` sql
+CREATE table escuelas.num_escuelas as
+SELECT 
+    e.ent_nomg,
+    COUNT(em.id) AS total_datos,
+    SUM(em.alumnos_to) AS alumnos,
+    SUM(em.docentes_t) AS docentes 
+FROM 
+    escuelas."Escuelas_Mexico" em
+JOIN 
+    public."Entidades" e
+ON 
+    em.clave_enti = e.cve_ent
+WHERE 
+    em.nivel IN ('PREESCOLAR', 'PRIMARIA', 'SECUNDARIA', 'MEDIA SUPERIOR')
+GROUP BY 
+    e.ent_nomg 
+ORDER BY 
+    total_datos DESC;
+```
